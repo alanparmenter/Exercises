@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* verify that getchar() != EOF is 0 or 1 */
+/* print the value of EOF */
 main()
 {
 	printf("%d\n", EOF); /* -1 */
