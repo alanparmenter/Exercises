@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-/* print Fahrenheit-Celcius table for fahr = 0, 20, ..., 300 */
+/* Print Fahrenheit-Celsius table */
 main()
 {
-	float fahr, celcius;
+	float fahr, celsius;
 	int lower, upper, step;
 	
 	lower = 0;		/* lower limit of temperature table */
@@ -15,8 +15,8 @@ main()
 	printf("ºF\tºC\n");	/* heading */
 	
 	while (fahr <= upper) {
-		celcius = 5.0/9.0 * (fahr-32);
-		printf("%3.0f\t%4.1f\n", fahr, celcius);
+		celsius = 5.0/9.0 * (fahr-32);
+		printf("%3.0f\t%4.1f\n", fahr, celsius);
 		fahr = fahr + step;
 	}
 }

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* Print celsius fahrenheit conversion table */
+/* Print Celsius-Fahrenheit table */
 main()
 {
 	int lower, upper, step;

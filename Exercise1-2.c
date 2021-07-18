@@ -1,6 +1,6 @@
-//EXPERIMENT WITH OTHER ESCAPE SEQUENCES
 #include <stdio.h>
-									
+
+/* Experiment with escape sequences	*/							
 main()								
 {
 //from 'complete set' table on p38:

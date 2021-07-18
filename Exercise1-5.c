@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* print Fahrenheit-Celsius table in reverse */
+/* Print Fahrenheit-Celsius table high to low */
 main()
 {
 	int fahr;
