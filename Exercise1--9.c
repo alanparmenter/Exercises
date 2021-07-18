@@ -1,7 +1,6 @@
-#include <stdio.h> //p20
+#include <stdio.h>
 
-/* Write a program to copy its input to its output,
-replacing each string of one or more blanks by a single blank */
+/* Copy input to output, replacing multiple blanks with a single blank */
 main()
 {
 	int b, c; /* previous character, current character */
