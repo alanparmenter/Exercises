@@ -12,12 +12,9 @@ main()
 	while ((c = getchar()) != EOF)
 		if (c == ' ') /* blanks */
 			++bl;
-		else if (c == '\t') /* tabs */
+		if (c == '\t') /* tabs */
 			++tb;
-		else if (c == '\n') /* newlines */
+		if (c == '\n') /* newlines */
 			++nl;
-	printf("\n"); printf("Blanks: "); printf("%d", bl);
-	printf("\n"); printf("Tabs: "); printf("%d", tb);
-	printf("\n"); printf("Newlines: "); printf("%d", nl);
-	printf("\n");
+	printf("%2d %d %d ", bl, tb, nl);
 }
