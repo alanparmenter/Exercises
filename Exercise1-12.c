@@ -7,7 +7,6 @@
 main()
 {
 	int b, c, state; /* previous b, current c */
-	b = 0;
 	state = OUT;
 	while ((c = getchar()) != EOF) {
 		if (c == ' ' || c == '\n' || c == '\t') {
