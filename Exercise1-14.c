@@ -13,6 +13,7 @@ main()
 		if (c >= 'A' && c <= 'Z')
 				++nchar[c - 'A'];
 	
+	putchar('\n');
 	for (i = 0; i < 26; ++i) {
 		while (nchar[i] >= 0) {
 			if (nchar[i] == 0)
