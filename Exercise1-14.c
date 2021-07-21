@@ -18,7 +18,7 @@ main()
 			if (nchar[i] == 0)
 				putchar(' ');
 			else
-				putchar('*');
+				putchar('|');
 			nchar[i] = nchar[i] - 1;
 		}
 		putchar('\n');
