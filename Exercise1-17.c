@@ -3,20 +3,23 @@
 #define MINLINE 80    /* minimum size to print line*/
 
 int gitline(char line[], int maxline);
-void copy(char to[], char from[]);
+void copy(int totlen, char to[], char from[]);
 
 /* print longest input line */
 main()
 {
   int len;               /* current line length */
+  int totlen;          /* total line length */
   int output;           /* if any lines longer than MINLINE */
   char line[MAXLINE];    /* current input line */
   char longlines[MAXLINE]; /* lines longer than MINLINE */
 
+  totlen = 0;
   output = 0;
   while ((len = gitline(line, MAXLINE)) > 0)
     if (len > MINLINE) {
-      copy(longlines, line);
+      copy(totlen, longlines, line);
+      totlen += len;
       output = 1;
     }
     if (output == 1)
@@ -40,12 +43,12 @@ int gitline(char s[], int lim)
 }
 
 /* copy: copy 'from' into 'to'; assume to is big enough */
-void copy(char to[], char from[])
+void copy(int totlen, char to[], char from[])
 {
   int i;
 
   i = 0;
-  while ((to[i] = from[i]) != '\0')
+  while ((to[i + totlen] = from[i]) != '\0')
     ++i;
 }
 
