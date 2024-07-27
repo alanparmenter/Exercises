@@ -1,64 +1,67 @@
 #include <stdio.h>
-#define MAXLINE 4096  /* maximum input line size*/
-#define MINLINE 1    /* minimum size to print line*/
+#define MAXLINE 1000    /* maximum input line size */
+#define MAXOUT 10000    /* maximum output array size */
+#define MINLINE 1      /* minimum line length for output */
 
-int gitline(char line[], int maxline);
-void copy(char to[], char from[]);
+int getline(char line[], int maxline);
+void copy(char to[], char from[], int size);
+int trunclen(char line[]);
 
-/* print longest input line */
+/* print longest line input */
 main()
 {
-  int len;                 /* current line length */
-  int output;              /* if any lines longer than MINLINE */
-  char line[MAXLINE];      /* current input line */
-  char longlines[MAXLINE]; /* lines longer than MINLINE */
-  char linesout[MAXLINE];  /* lines excepting trailing spaces and tabs */
-  int i;                   /* for loop index */
-  char c;                  /* for loop character*/
-  int j;                   /* last acceptable character index */
+    int len;                 /* line length from getline */
+    int trailend;            /* number of non-trailing characters */
+    int offset;              /* cumulative index for insertion */
+    char line[MAXLINE];      /* current line from input */
+    char output[MAXOUT];     /* output for lines at end */
 
-  output = 0;
-  while ((len = gitline(line, MAXLINE)) > 0)
-    if (len > MINLINE) {
-      copy(longlines, line);
-      for (i=0; i<len; i++) {
-        if ((c = longlines[i]) != ' ' && c != '\t' && c != '\n' && c != EOF) {
-          j = i;
+    offset = trailend = 0;
+    while ((len = getline(line, MAXLINE)) > 0)
+        if (len > MINLINE) {
+            trailend = trunclen(line);
+            if (trailend > 0) {
+                copy(output, line, offset);
+                offset += trailend;
+                output[offset++] = '\n';
+            }
+            trailend = 0;
         }
-      }
-      for (i=0; i<j; i++) {
-        linesout[i] = longlines[i]
-      }
-      output = 1;
+    output[offset++] = '\0';
+    printf("%s", output);
+    return 0;
+}
+
+/* getline: read a line into s, return length */
+int getline(char s[], int lim)
+{
+    int c, i;
+    for (i = 0; i < lim-1 && (c = getchar()) != EOF && c != '\n'; ++i)
+        s[i] = c;
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
     }
-    if (output == 1)
-
-      printf("%d", j+1);
-  return 0;
+    s[i] = '\0';
+    return i;
 }
 
-/* gitline: read a line into s, return length */
-int gitline(char s[], int lim)
+/* trunclen: return length without trailing whitespace */
+int trunclen(char line[])
 {
-  int c = 0, i;
-
-  for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
-    s[i] = c;
-  if (c == '\n') {
-    s[i] = c;
-    ++i;
-  }
-  s[i] = '\0';
-  return i;
+    int i, c, j;
+    j = 0;
+    for (i = 0; (c = line[i]) != '\0' && c != EOF; ++i)
+        if (c != ' ' && c != '\t' && c != '\n')
+            j = i + 1;
+    return j;
 }
 
-/* copy: copy 'from' into 'to'; assume to is big enough */
-void copy(char to[], char from[])
+
+/* copy 'from' into 'to' */
+void copy(char to[], char from[], int j)
 {
-  int i;
-
-  i = 0;
-  while ((to[i] = from[i]) != '\0')
-    ++i;
+    int i;
+    for (i = 0; (to[j + i] = from[i]) != '\0'; ++i)
+        ;
 }
-
