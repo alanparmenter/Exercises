@@ -1,18 +1,22 @@
 #include <stdio.h>
 
-#define MAXLINE 80
 #define TABWIDTH 4
 
 main()
 {
 	int c, i, j;
-	for (i = 0; i < MAXLINE-1
-		&& (c=getchar()) != EOF && c != '\n'; ++i)
+	i = 0;
+		while ((c=getchar()) != EOF) {	
 			if (c == '\t')
 				for (j = 0; j < (TABWIDTH - i % TABWIDTH); ++j)
 					putchar(' ');
-			else putchar(c);
-		if (c == '\n')
-			putchar('\n');
+			else if (c == '\n') {
+				i = 0;
+				putchar(c);
+			} else {
+				putchar(c);
+				i++;
+			}
+		}
 	return 0;
 }
