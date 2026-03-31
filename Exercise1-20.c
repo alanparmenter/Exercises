@@ -10,7 +10,9 @@ main()
 		&& (c=getchar()) != EOF && c != '\n'; ++i)
 			if (c == '\t')
 				for (j = 0; j < (TABWIDTH - i % TABWIDTH); ++j)
-					printf("%c", ' ');
-			else printf("%c", c);
+					putchar(' ');
+			else putchar(c);
+		if (c == '\n')
+			putchar('\n');
 	return 0;
 }
